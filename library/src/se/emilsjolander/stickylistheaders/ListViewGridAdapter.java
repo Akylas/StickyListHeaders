@@ -436,6 +436,7 @@ public class ListViewGridAdapter
     public void notifyDataSetChanged() {
         actualTotalCount = mRealAdapter.getCount();
         actualRowCount = 0;
+        actualNumColumns = 0;
         updateNumColumns();
         if (actualNumColumns > 0) {
             actualRowCount = getRowCount();
@@ -447,5 +448,7 @@ public class ListViewGridAdapter
     public void notifyDataSetInvalidated() {
         mRealAdapter.notifyDataSetInvalidated();
     }
+    
+    
 
 }
