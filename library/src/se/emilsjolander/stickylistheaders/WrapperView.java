@@ -7,7 +7,6 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.View.MeasureSpec;
 
 /**
  * 
@@ -69,20 +68,21 @@ public class WrapperView extends ViewGroup {
 				removeView(this.mHeader);
 			}
 			this.mHeader = header;
+			if (mHeader != null) {
+	            final ViewParent parent = mHeader.getParent();
+	            if(parent != this && !(parent instanceof StickyListHeadersListViewAbstract)) {
+	                if(parent instanceof ViewGroup) {
+	                    ((ViewGroup) parent).removeView(mHeader);
+	                }
+	                addView(mHeader);
+	            }
+//	            if (mHeader.getVisibility() != View.VISIBLE) {
+//	                mHeader.setVisibility(View.VISIBLE);
+//	            }
+	        }
 		}
 		
-		if (mHeader != null) {
-            final ViewParent parent = mHeader.getParent();
-            if(parent != this) {
-                if(parent instanceof ViewGroup) {
-                    ((ViewGroup) parent).removeView(mHeader);
-                }
-                addView(mHeader);
-            }
-            if (mHeader.getVisibility() != View.VISIBLE) {
-                mHeader.setVisibility(View.VISIBLE);
-            }
-        }
+		
 
 		if (this.mDivider != divider) {
 			this.mDivider = divider;
