@@ -25,6 +25,7 @@ public class WrapperView extends ViewGroup {
 
 	WrapperView(Context c) {
 		super(c);
+        setClipChildren(false);
 	}
 
 	public boolean hasHeader() {
