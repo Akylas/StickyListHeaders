@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -418,11 +419,18 @@ public class ListViewGridAdapter
         }
     }
     
+    private int lastWidth = 0;
     public boolean updateNumColumns() {
-        if (listView.getMeasuredWidth() != 0 && requestedColumnCount > 0 || 
-                requestedColumnWidth > 0) {
+        final int width = listView.getMeasuredWidth();
+        if (lastWidth != width && width != 0 && (requestedColumnCount > 0 || 
+                requestedColumnWidth > 0)) {
             int oldNum = actualNumColumns;
-            if (determineColumns() != oldNum) {
+            determineColumns();
+            if (actualNumColumns == 0) {
+                return false;
+            }
+            lastWidth = width;
+            if (actualNumColumns != oldNum) {
                 if (mIsSectionAdapter) {
                     recalculateItemsPerRow();
                 }
@@ -437,6 +445,7 @@ public class ListViewGridAdapter
         actualTotalCount = mRealAdapter.getCount();
         actualRowCount = 0;
         actualNumColumns = 0;
+        lastWidth = 0;
         updateNumColumns();
         if (actualNumColumns > 0) {
             actualRowCount = getRowCount();
