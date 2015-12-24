@@ -134,7 +134,8 @@ public class WrapperView extends ViewGroup {
 		
 		//if height was specifically set in heightMeasureSpec, then use it.
 		//very usefull for insertion or removal animation.
-		setMeasuredDimension(measuredWidth,(heightMeasureSpec <= 0)?measuredHeight:MeasureSpec.getSize(heightMeasureSpec));
+		int mode = MeasureSpec.getMode(heightMeasureSpec);
+		setMeasuredDimension(measuredWidth,(mode != MeasureSpec.EXACTLY)?measuredHeight:MeasureSpec.getSize(heightMeasureSpec));
 	}
 
 	@Override
