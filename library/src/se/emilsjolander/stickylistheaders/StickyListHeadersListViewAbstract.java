@@ -407,12 +407,12 @@ public abstract class StickyListHeadersListViewAbstract<C extends ListView & Wra
 
             // update header views visibility
             View childHeader = wrapperViewChild.mHeader;
-            if (wrapperViewChild.getTop() < top) {
+            final ViewParent parent = childHeader.getParent();
+            if (mHeader != childHeader &&  wrapperViewChild.getTop() < top && parent != null) {
                 if (childHeader != this.mHeader && childHeader.getVisibility() != View.INVISIBLE) {
                     childHeader.setVisibility(View.INVISIBLE);
                 }
             } else {
-                final ViewParent parent = childHeader.getParent();
                 //make sure we dont remove the parent if we are the parent = sticky header
                 if(parent != wrapperViewChild && parent != this) {
                     if(parent instanceof ViewGroup) {
