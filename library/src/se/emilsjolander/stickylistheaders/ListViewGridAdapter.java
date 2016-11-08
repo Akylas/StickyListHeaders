@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -268,10 +267,13 @@ public class ListViewGridAdapter
                 }
                 final View v = mRealAdapter.getView(i + startIndex, childConvertView, parent);
                 if (v != childConvertView) {
-                    childLayout.addView(v);
+                    
                     if (childConvertView != null) {
                         realAdapterConvertViewPool.add(childConvertView);
                         childLayout.removeView(childConvertView);
+                    }
+                    if (v != null) {
+                        childLayout.addView(v);
                     }
                     childConvertView = v;
                 }
