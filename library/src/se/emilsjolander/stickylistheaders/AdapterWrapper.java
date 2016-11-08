@@ -128,7 +128,7 @@ public class AdapterWrapper extends BaseAdapter implements StickyListHeadersAdap
 	 * {@link WrapperView} and will also recycle the divider if it exists.
 	 */
 	private View configureHeader(WrapperView wv, final int position) {
-		View header = wv.mHeader == null ? popHeader() : wv.mHeader;
+		View header = (wv.mHeader != null && !(wv.mHeader.getParent() instanceof StickyListHeadersListViewAbstract)) ? wv.mHeader : popHeader();
 		header = mDelegate.getHeaderView(position, header, wv);
 		if (header == null) {
 			throw new NullPointerException("Header view must not be null.");
