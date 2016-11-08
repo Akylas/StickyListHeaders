@@ -68,21 +68,19 @@ public class WrapperView extends ViewGroup {
 				removeView(this.mHeader);
 			}
 			this.mHeader = header;
-			if (mHeader != null) {
-	            final ViewParent parent = mHeader.getParent();
-	            if(parent != this && !(parent instanceof StickyListHeadersListViewAbstract)) {
-	                if(parent instanceof ViewGroup) {
-	                    ((ViewGroup) parent).removeView(mHeader);
-	                }
-	                addView(mHeader);
-	            }
-//	            if (mHeader.getVisibility() != View.VISIBLE) {
-//	                mHeader.setVisibility(View.VISIBLE);
-//	            }
-	        }
 		}
-		
-		
+		if (mHeader != null) {
+		    if (mHeader.getVisibility() != View.VISIBLE) {
+	              mHeader.setVisibility(View.VISIBLE);
+	        }
+            final ViewParent parent = mHeader.getParent();
+            if(parent != this && !(parent instanceof StickyListHeadersListViewAbstract)) {
+                if(parent instanceof ViewGroup) {
+                    ((ViewGroup) parent).removeView(mHeader);
+                }
+                addView(mHeader);
+            }
+        }
 
 		if (this.mDivider != divider) {
 			this.mDivider = divider;
