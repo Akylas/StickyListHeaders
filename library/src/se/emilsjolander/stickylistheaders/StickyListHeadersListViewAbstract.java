@@ -245,6 +245,8 @@ public abstract class StickyListHeadersListViewAbstract<C extends ListView & Wra
     private void clearHeader() {
         if (mHeader != null) {
             removeView(mHeader);
+          //reset transformation on removed header
+            transformYView(mHeader, 0);
             mHeader = null;
             mHeaderId = null;
             mHeaderPosition = null;
