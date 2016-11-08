@@ -296,7 +296,7 @@ public abstract class StickyListHeadersListViewAbstract<C extends ListView & Wra
             final long headerId = mAdapter.getHeaderId(headerPosition);
             if (mHeaderId == null || mHeaderId != headerId) {
                 mHeaderId = headerId;
-                final View header = mAdapter.getHeaderView(mHeaderPosition, mHeader, this);
+                final View header = mAdapter.getHeaderView(mHeaderPosition, null, this);
                 if (mHeader != header) {
                     if (header == null) {
                         throw new NullPointerException("header may not be null");
