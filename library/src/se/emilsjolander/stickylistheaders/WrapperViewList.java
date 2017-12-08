@@ -10,9 +10,8 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.ListView;
 
-class WrapperViewList extends ListView implements WrapperViewListInterface, AbsListViewHeadersSupport {
+class WrapperViewList extends NestedListView implements WrapperViewListInterface, AbsListViewHeadersSupport {
 	private WrapperListViewLifeCycleListener mLifeCycleListener;
 	private List<View> mFooterViews;
 	private int mTopClippingLength;
